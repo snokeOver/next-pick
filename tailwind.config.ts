@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
+import colors from "tailwindcss/colors";
 export default {
   darkMode: ["class"],
   content: [
@@ -21,12 +22,22 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: colors.gray[800],
+          bg: colors.sky[400],
+          hover: colors.sky[300],
+          border: colors.sky[700],
+          text: colors.sky[300],
+          dark: colors.gray[800],
+          ["dark-hover"]: colors.gray[900],
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: colors.gray[200],
+          bg: colors.gray[400],
+          hover: colors.gray[300],
+          border: colors.gray[700],
+          text: colors.gray[400],
+          dark: colors.gray[800],
+          ["dark-hover"]: colors.gray[900],
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

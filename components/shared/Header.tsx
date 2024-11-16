@@ -5,13 +5,37 @@ import { Button } from "../ui/button";
 import Logo from "./Logo";
 import SearchBox from "./SearchBox";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useThemeStore } from "@/lib/store/store";
+import { useTheme } from "next-themes";
 
 const Header = () => {
   const router = useRouter();
   const [showFullSearch, setShowFullSearch] = useState<boolean>(false);
   const { theme, setTheme } = useThemeStore();
+
+  const { theme: providerTheme, setTheme: setProviderTheme } = useTheme();
+
+  // To prevent infinite loop
+  const isInitialSync = useRef(true);
+
+  // Sync Zustand's theme with provider's theme on initial load
+  useEffect(() => {
+    if (isInitialSync.current) {
+      if (providerTheme && providerTheme !== theme) {
+        setTheme(providerTheme);
+      }
+      isInitialSync.current = false; // Set to false after initial sync
+    }
+  }, [providerTheme, theme, setTheme]);
+
+  // Update provider theme when Zustand theme changes
+  useEffect(() => {
+    if (theme !== providerTheme) {
+      setProviderTheme(theme);
+    }
+  }, [theme, providerTheme, setProviderTheme]);
+
   return (
     <div className="w-full flex items-center justify-between px-4 py-2 bg-[#12121280] sticky z-50 top-0 backdrop-blur-2xl transition-colors">
       {/* First part: Logo Part */}
@@ -54,6 +78,9 @@ const Header = () => {
         >
           <Heart className="text-primary-border" />
           <span className="hidden lg:flex">Watch List</span>
+          <div className="absolute -top-[2px] -left-[2px] text-gray-800 border border-sky-700 rounded-full bg-sky-300">
+            <span className="px-[5px] font-semibold">0</span>
+          </div>
         </Button>
       </div>
     </div>

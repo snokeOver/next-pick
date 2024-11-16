@@ -18,7 +18,7 @@ const Logo = ({ showFullSearch, footer = false }: LogoProps) => {
         <span>
           <ArrowBigRightDash className="text-sky-600 mr-1" />
         </span>
-        Movie<span className="text-sky-600">Star</span>
+        Next<span className="text-sky-600">Pick</span>
       </p>
     </Link>
   );

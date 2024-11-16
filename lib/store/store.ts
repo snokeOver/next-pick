@@ -1,4 +1,4 @@
-import { ThemeStore } from "@/type-props/interfaces";
+import { ThemeStore, WatchList } from "@/type-props/interfaces";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
