@@ -1,25 +1,24 @@
 "use client";
+import { Rating } from "@smastrom/react-rating";
+
+import "@smastrom/react-rating/style.css";
 
 import { getProducts } from "@/lib/api/getProducts";
 import { Product, ProductDetailsProps } from "@/type-props/interfaces";
-// import { Metadata } from "next";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-// export const metadata: Metadata = {
-//   title: "Next Pick || Product Details page",
-// };
 
 const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [crurProduct, setCurrProduct] = useState<Product[]>([]);
+  const [crurProduct, setCurrProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const getItems = async () => {
       const product = await getProducts();
 
-      setCurrProduct(product.filter((item) => item.id === id));
+      setCurrProduct(product.find((item) => item.id == id) || null);
       setIsLoading(false);
     };
 
@@ -31,10 +30,7 @@ const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
     return;
   }
 
-  const { image, title, description, rating, genres, category, price } =
-    crurProduct[0];
-
-  //   const wishedMovie = { image, title, id, release_date, genres };
+  const { image, title, description, rating, category, price } = crurProduct;
 
   return (
     <div className="py-10 px-3 md:px-10 min-h-[500px]">
@@ -49,31 +45,28 @@ const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
           />
         </div>
         <div className="w-full flex flex-col gap-2 flex-1 h-auto ">
-          <h2 className="text-2xl font-semibold underline decoration-[1px]">
-            {title}
-          </h2>
+          <h2 className="text-2xl font-semibold decoration-[1px]">{title}</h2>
           <p className="text-sm leading-6 tracking-wide mt-2 flex-grow">
             {description}
           </p>
 
           <p className="text-gray-600 text-sm">
-            Genres:{" "}
-            {/* {genres.map((item: Genre) => (
-              <span
-                key={item?.id}
-                className="text-secondary-text font-medium mr-1"
-              >
-                {item?.name},
+            Category:
+            {
+              <span className="text-secondary-text font-medium ml-1">
+                {category}
               </span>
-            ))} */}
+            }
           </p>
 
           <p className="text-gray-600 text-sm">
-            Release Data:{" "}
-            <span className="text-secondary-text font-medium">{price}</span>
+            Price:
+            <span className="text-secondary-text font-medium"> ${price}</span>
           </p>
 
-          <p className="text-gray-600 text-sm">Cast:</p>
+          <div className="text-gray-600 text-sm">
+            <Rating style={{ maxWidth: 250 }} value={Math.floor(rating.rate)} />
+          </div>
 
           {/* <div>
             <WishListActionButtons movie={wishedMovie} />
@@ -83,8 +76,5 @@ const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
     </div>
   );
 };
-
-// Exporting revalidate settings directly from the page component
-export const revalidate = 60; // Revalidate every 60 seconds
 
 export default MovieDetails;
