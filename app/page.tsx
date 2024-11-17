@@ -1,7 +1,13 @@
-const Home = () => {
+import Banner from "@/components/shared/Banner";
+import { getProducts } from "@/lib/api/getProducts";
+
+const Home = async () => {
+  const product = await getProducts();
+
   return (
     <main>
-      <h1>Next Pick home</h1>
+      {/* Banner section */}
+      <Banner bannerItmes={product} />
     </main>
   );
 };

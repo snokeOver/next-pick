@@ -62,7 +62,7 @@ const SearchBox = ({ showFullSearch, setShowFullSearch }: SearchBoxProps) => {
                   <Input
                     placeholder="Search by title ... "
                     {...field}
-                    className="rounded-l-full border border-secondary-border text-lg py-1 px-4 w-full focus:border-blue-300 outline-none bg-gray-900 text-secondary-text"
+                    className="rounded-l-full border border-secondary-border text-md py-1 px-4 w-full focus:border-blue-300 outline-none bg-gray-900 text-secondary-text"
                   />
                 </FormControl>
               </FormItem>

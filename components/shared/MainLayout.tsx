@@ -12,12 +12,10 @@ const MainLayout = ({
 }>) => {
   const { theme } = useThemeStore();
 
-  console.log(theme);
-
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme={"light"}
+      defaultTheme={theme}
       enableSystem
       disableTransitionOnChange
     >

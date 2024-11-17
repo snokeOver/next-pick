@@ -8,12 +8,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useThemeStore } from "@/lib/store/store";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const Header = () => {
   const router = useRouter();
   const [showFullSearch, setShowFullSearch] = useState<boolean>(false);
   const { theme, setTheme } = useThemeStore();
-
   const { theme: providerTheme, setTheme: setProviderTheme } = useTheme();
 
   // To prevent infinite loop
@@ -43,11 +43,15 @@ const Header = () => {
 
       {/* Middle Part for Search bar*/}
 
-      <div>
+      <div className="flex gap-2 justify-between w-full px-5">
         <SearchBox
           showFullSearch={showFullSearch}
           setShowFullSearch={setShowFullSearch}
         />
+
+        <Button variant={"ghost"}>
+          <Link href={"/product"}>Product</Link>
+        </Button>
       </div>
 
       {/*Right part For search button and Theme Toggle button */}
