@@ -23,7 +23,7 @@ const Banner = ({ bannerItmes }: BannerProps) => {
               height={1080}
               className="embla__slide"
             />
-            <div className="hidden lg:inline absolute top-0 pt-40 xl:pt-72 left-10 bg-transparent z-20 h-full w-full bg-gradient-to-r from-gray-900/90 via-transparent to-transparent p-10 space-y-5 text-gray-50">
+            <div className="hidden lg:inline absolute top-0 pt-40 xl:pt-72  bg-transparent z-20 h-full w-full bg-gradient-to-r from-gray-900/90 via-transparent to-transparent p-10 space-y-5 text-gray-50">
               <h2 className="text-4xl font-bold max-w-xl">{item?.title}</h2>
               <p className="max-w-xl line-clamp-3">{item?.description}</p>
             </div>

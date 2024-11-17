@@ -31,3 +31,15 @@ export interface Product {
 export interface BannerProps {
   bannerItmes: Product[];
 }
+
+export interface SectionContainerProps {
+  title: string;
+  isLoading?: boolean;
+  products: Product[];
+}
+
+export interface ProductDetailsProps {
+  params: {
+    id: string;
+  };
+}
