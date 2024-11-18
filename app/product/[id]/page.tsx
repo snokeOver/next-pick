@@ -4,13 +4,16 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 import { getProducts } from "@/lib/api/getProducts";
-import { Product, ProductDetailsProps } from "@/type-props/interfaces";
+import { Product } from "@/type-props/interfaces";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import LoadingSpinner from "@/components/shared/LoadingSpinner";
 
-const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const MovieDetails = () => {
+  const { id } = useParams();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [crurProduct, setCurrProduct] = useState<Product | null>(null);
 
@@ -24,6 +27,10 @@ const MovieDetails = ({ params: { id } }: ProductDetailsProps) => {
 
     getItems();
   }, []);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (!crurProduct) {
     console.error("Movie details not found");
